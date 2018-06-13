@@ -1,7 +1,7 @@
 # RaspberryPi-NHD-2.4-TFT
 C executable for the RaspberryPi to output an area of the framebuffer to the NHD-2.4-240320CF TFT (ST7789, 16 bit parallel)
 
-This is a driver for a Newhaven 2.4" TFT display (http://www.newhavendisplay.com/tfts-24-tfts-c-1_590.html). It maps the framebuffer of the main display to memory, extracts a 320x240 pixel sized area and sends this to the TFT display via the 16 bit parallel interface.
+This is a driver for a Newhaven 2.4" TFT display (http://www.newhavendisplay.com/tfts-24-tfts-c-1_590.html). It maps the framebuffer of the main display (/dev/fb0) to memory, extracts a 320x240 pixel sized area and sends this to the TFT display via the 16 bit parallel interface.
 
 ![TFT showing 320x240 area](/images/raspberry-desktop-320x240.jpg)
 
@@ -33,12 +33,12 @@ Connect the **TFT Pins** from the FFC40 breakout to the **Raspberry's GPIO** (I 
         NC  5   -   
         NC  6   -  
        VDD  7   3.3v   
-     IOVDD  8   3.3v (typ. 1.8V, max 3.3V)   
+     IOVDD  8   3.3v (typical 1.8V, max 3.3V)   
         NC  9   -   
        /CS 10   GND (= CS is always enabled)   
        D/C 11   PIN 07 / GPIO04   
        /WR 12   PIN 12 / GPIO18   
-       /RD 13   PIN 01 / 3.3v (the read function is not used)   
+       /RD 13   3.3v (the read function is not used)   
        DB0 14   PIN 13 / GPIO27   
        DB1 15   PIN 15 / GPIO22    
        DB2 16   PIN 16 / GPIO23    
@@ -76,10 +76,10 @@ Connect the **TFT Pins** from the FFC40 breakout to the **Raspberry's GPIO** (I 
 This will generate the executable **NHD_24** in the same folder as the .c file
 * To run the executable, enter  
 `sudo ./NHD_24`  
-into the terminal (or bouble click on the file)
-* `CTRL-C` terminates the executable when run from the terminal
+into the terminal
+* `CTRL-C` stops the executable
 
 ## Offsetting the TFT display area
 
-The 320x240 pixel area that is output to the TFT has its origin by default at the upper left corner (0/0) of the display. If you want to move the area to some other location within the display's resolution, you can change the values of the #defines `X_START` and `Y_START` in the NHD_24_240320_Framebuffer2GPIO.c file at line numbers 24 and 25.
+The 320x240 pixel area that is output to the TFT has its origin by default at the upper left corner (0/0) of the display. If you want to move the area to some other location within the display's resolution, you can change the values of the #defines `X_START` and `Y_START` in the .c file, lines 24 and 25.
 
